@@ -1,73 +1,100 @@
-# React + TypeScript + Vite
+# Users Manager Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Ссылка на GitHub Pages](https://yaroslav-chertov.github.io/users-manager/)
 
-Currently, two official plugins are available:
+**Users Manager** — это тестовое приложение для управления пользователями: просмотр, добавление, редактирование и удаление.
+Проект реализован на **React + TypeScript + Redux Toolkit**, с использованием **MockAPI.io** для хранения данных.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Скриншот приложения](./src/assets/images/Screenshot_readme.png)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Функционал
 
-## Expanding the ESLint configuration
+- Просмотр списка пользователей в таблице с пагинацией
+- Открытие модального окна для создания нового пользователя
+- Редактирование существующего пользователя в модальном окне
+- Просмотр детальной информации о пользователе на отдельной странице
+- Удаление пользователя
+- Обработка ошибок с отображением в интерфейсе
+- Адаптивный интерфейс
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Используемые технологии
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Технология                 | Назначение                                     |
+| -------------------------- | ---------------------------------------------- |
+| **React**                  | Компонентный UI-фреймворк                      |
+| **TypeScript**             | Строгая типизация и стабильность кода          |
+| **Redux Toolkit**          | Управление состоянием и асинхронными запросами |
+| **Axios**                  | Выполнение HTTP-запросов                       |
+| **react-router-dom**       | Навигация между страницами                     |
+| **Material UI / Tailwind** | Быстрая стилизация и готовые компоненты        |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## API
+
+Приложение использует сервис **[MockAPI.io](https://mockapi.io/)** для хранения данных пользователей.
+Все пользователи хранятся по адресу (пример):
+
+```
+https://69176682a7a34288a280a15d.mockapi.io/users
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> API поддерживает операции **GET**, **POST**, **PUT**, **DELETE**, поэтому изменения сохраняются и отображаются в интерфейсе.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🖥️ Установка и запуск
+
+1. **Клонируйте репозиторий:**
+
+```bash
+git clone https://github.com/Yaroslav-Chertov/users-manager.git
+cd users-manager
 ```
+
+2. **Установите зависимости:**
+
+```bash
+npm install
+```
+
+3. **Запустите проект в режиме разработки:**
+
+```bash
+npm start
+```
+
+4. **Откройте в браузере:**
+
+```
+http://localhost:3000
+```
+
+---
+
+## Структура проекта
+
+```
+src/
+ ├─ app/                     # Redux store и хуки
+ ├─ features/
+ │   └─ users/
+ │       ├─ components/      # Модалки и UI-компоненты
+ │       └─ usersSlice.ts    # Redux slice и async thunks
+ ├─ App.tsx                  # Главный компонент приложения
+ ├─ index.css                # Глобальные стили
+ └─ index.tsx                # Точка входа
+```
+
+---
+
+## 🌟 Возможные улучшения
+
+- 🔍 Реализовать фильтрацию и сортировку пользователей
+- 📑 Добавить более продвинутую пагинацию
+- 🧱 Подключить собственный backend для хранения данных
+- 🎨 Улучшить UX/UI по полноценному дизайн-макету
