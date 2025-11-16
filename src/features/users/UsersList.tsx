@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUsers, setPage } from "./usersSlice";
 import type { RootState, AppDispatch } from "../../app/store";
 import UserModal from "./UserModal.tsx";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function UsersList() {
   const dispatch = useDispatch<AppDispatch>();
-  const { list, loading, error, page, limit } = useSelector(
+  const navigate = useNavigate();
+
+  const { list, loading, error, page, limit, total } = useSelector(
     (s: RootState) => s.users
   );
+
+  const lastPage = Math.ceil(total / limit);
 
   const [isOpen, setOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
@@ -42,20 +46,25 @@ export default function UsersList() {
               <th>Имя</th>
               <th>Email</th>
               <th>Телефон</th>
-              <th>Детали</th>
+              <th>Действия</th>
             </tr>
           </thead>
           <tbody>
             {Array.isArray(list) &&
               list.map((u) => (
-                <tr key={u.id}>
+                <tr
+                  key={u.id}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/user/${u.id}`)}
+                >
                   <td>{u.name}</td>
                   <td>{u.email}</td>
                   <td>{u.phone}</td>
                   <td>
-                    <Link to={`/user/${u.id}`}>Открыть</Link>{" "}
                     <button
-                      onClick={() => {
+                      className="button-edit"
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setEditing(u);
                         setOpen(true);
                       }}
@@ -79,7 +88,12 @@ export default function UsersList() {
 
         <span>Стр. {page}</span>
 
-        <button onClick={() => dispatch(setPage(page + 1))}>Next ▶</button>
+        <button
+          disabled={page >= lastPage}
+          onClick={() => dispatch(setPage(page + 1))}
+        >
+          Next ▶
+        </button>
       </div>
 
       {isOpen && <UserModal onClose={() => setOpen(false)} editing={editing} />}

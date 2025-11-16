@@ -26,7 +26,6 @@ export const loadUsers = createAsyncThunk(
   "users/load",
   async ({ page, limit }: { page: number; limit: number }) => {
     const res = await usersApi.fetchUsers(page, limit);
-    // try to read total from headers, fallback to length
     const total = Number(res.headers["x-total-count"]) || res.data.length;
     return { data: res.data, total };
   }
@@ -74,11 +73,6 @@ const usersSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      //   .addCase(loadUsers.fulfilled, (state, action) => {
-      //     state.loading = false;
-      //     state.list = action.payload.data;
-      //     state.total = action.payload.total;
-      //   })
       .addCase(loadUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.list = Array.isArray(action.payload.data)

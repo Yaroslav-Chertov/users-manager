@@ -27,6 +27,10 @@ button {
   transition: background 0.2s;
 }
 
+.button-edit {
+  width: 100%;
+}
+
 button:hover {
   background: #3a52d6;
 }

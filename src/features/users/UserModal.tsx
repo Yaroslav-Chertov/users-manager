@@ -38,14 +38,11 @@ export default function UserModal({
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      {/* Обёртка для формы и крестика */}
       <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
-        {/* Крестик закрытия */}
         <button type="button" className="modal-close" onClick={onClose}>
           ×
         </button>
 
-        {/* Форма */}
         <form onSubmit={submit} className="modal">
           <h3>{editing ? "Редактирование" : "Создать пользователя"}</h3>
 
