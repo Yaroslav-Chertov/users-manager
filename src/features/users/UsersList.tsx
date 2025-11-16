@@ -9,11 +9,17 @@ export default function UsersList() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const { list, loading, error, page, limit, total } = useSelector(
-    (s: RootState) => s.users
-  );
+  const {
+    list,
+    loading,
+    error,
+    page,
+    limit = 5,
+    total = 0,
+  } = useSelector((s: RootState) => s.users);
 
-  const lastPage = Math.ceil(total / limit);
+  // Безопасный расчёт последней страницы
+  const lastPage = Math.max(Math.ceil(total / limit), 1);
 
   const [isOpen, setOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
@@ -89,7 +95,7 @@ export default function UsersList() {
         <span>Стр. {page}</span>
 
         <button
-          disabled={page >= lastPage}
+          disabled={page >= lastPage || total === 0}
           onClick={() => dispatch(setPage(page + 1))}
         >
           Next ▶
