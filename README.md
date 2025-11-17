@@ -1,6 +1,6 @@
 # Users Manager Frontend
 
-[Ссылка на GitHub Pages](https://yaroslav-chertov.github.io/users-manager/)
+[Ссылка на деплой на Vercel](https://users-manager-theta.vercel.app/)
 
 **Users Manager** — это тестовое приложение для управления пользователями: просмотр, добавление, редактирование и удаление.
 Проект реализован на **React + TypeScript + Redux Toolkit**, с использованием **MockAPI.io** для хранения данных.
